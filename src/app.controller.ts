@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { AppService } from './app.service';
 import { BodyDTO } from './dto/body.dto';
 
@@ -14,5 +15,10 @@ export class AppController {
   @Post()
   setCache(@Body() test:BodyDTO) {
     return this.appService.setCache(test);
+  }
+
+  @Post('test')
+  cache(@Req() req: Request, @Res() res: Response, @Body() test:BodyDTO) {
+    return this.appService.cache(req,res,test);
   }
 }
